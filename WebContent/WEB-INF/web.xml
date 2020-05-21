@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>Bibliotheques</display-name>
+	<welcome-file-list>
+		<welcome-file>accueilAdmin</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>fr.lusseau.claude.bibliotheques.listeners.AppContextListener</listener-class>
+	</listener>
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<include-prelude>/WEB-INF/jsp/includes/taglibs.jsp</include-prelude>
+		</jsp-property-group>
+	</jsp-config>
+
+	<servlet>
+		<servlet-name>JSP_ACCUEIL</servlet-name>
+		<jsp-file>/WEB-INF/jsp/public/index.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JSP_ACCUEIL</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>JSP_ACCUEIL_ADMIN</servlet-name>
+		<jsp-file>/WEB-INF/jsp/admin/accueilAdmin.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JSP_ACCUEIL_ADMIN</servlet-name>
+		<url-pattern>/accueilAdmin</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>
