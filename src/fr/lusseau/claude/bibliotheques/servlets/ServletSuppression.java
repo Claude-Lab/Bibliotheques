@@ -29,9 +29,11 @@ public class ServletSuppression extends HttpServlet {
 			// exportation de la suppression par forulaire
 			DeletebyId delete = new DeletebyId();
 			delete.supprimerPersonne(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/gestionsalarie");
+			rd.forward(request, response);
 
 			// Condition de redirection après suppression.
-			redirectionPersonne(request, response);
+			//redirectionPersonne(request, response);
 		}
 
 		if (request.getParameter("id_Cotisation") != null) {
@@ -127,6 +129,7 @@ public class ServletSuppression extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	private void redirectionPersonne(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
