@@ -177,7 +177,7 @@
 												</select>
 												<div class="invalid-feedback">Selection obligatoire</div>
 											</div>
-										</ul> 
+										</ul>
 									</nav>
 								</div>
 								<div class="col-sm-6 mb-3 mb-sm-0">
