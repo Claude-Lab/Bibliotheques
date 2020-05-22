@@ -41,7 +41,7 @@
 											de personnes en base</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
 										
-											<p><c:out value="${nbrPersonne.value}" /> personnes</p>
+											<p><c:out value="${value}" /> personnes</p>
 										</div>
 									</div>
 									<div class="col-auto">

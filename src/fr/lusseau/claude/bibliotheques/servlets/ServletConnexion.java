@@ -68,7 +68,7 @@ public class ServletConnexion extends HttpServlet {
 			} else {
 				String message = "Mail ou mot de passe invalide !";
 				request.setAttribute("message", message);
-				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/public/connexion.jsp").forward(request,
+				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/public/index.jsp").forward(request,
 						response);
 			}
 

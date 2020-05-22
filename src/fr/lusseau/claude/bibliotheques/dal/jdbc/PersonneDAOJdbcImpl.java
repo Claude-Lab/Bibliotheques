@@ -70,7 +70,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlCountPerson);
 			rs.next();
-			nbPersonne = rs.getInt(nbPersonne);
+			nbPersonne = rs.getInt(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

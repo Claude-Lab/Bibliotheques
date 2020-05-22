@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.lusseau.claude.bibliotheques.bll.BLLException;
 import fr.lusseau.claude.bibliotheques.bll.PersonneManager;
@@ -14,10 +15,10 @@ import fr.lusseau.claude.bibliotheques.bll.PersonneManager;
 /**
  * Servlet implementation class ServletAcceuilAdmin
  */
-@WebServlet("/acceuiladmin")
-public class ServletAcceuilAdmin extends HttpServlet {
+@WebServlet("/admin")
+public class ServletAccueilAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String VUE = "/WEB-INF/jsp/admin/acceuilAdmin.jsp";
+	public static final String VUE = "/WEB-INF/jsp/admin/accueilAdmin.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -26,7 +27,8 @@ public class ServletAcceuilAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
+		@SuppressWarnings("unused")
+		HttpSession session = request.getSession();
 		nbrPersonne(request);
 	
 
@@ -39,9 +41,7 @@ public class ServletAcceuilAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		nbrPersonne(request);
-
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		doGet(request, response);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class ServletAcceuilAdmin extends HttpServlet {
 	 * 
 	 * @param request
 	 */
-	private int nbrPersonne(HttpServletRequest request) {
+	private void nbrPersonne(HttpServletRequest request) {
 		PersonneManager manager = new PersonneManager();
 		int value = 0;
 		try {
@@ -58,7 +58,7 @@ public class ServletAcceuilAdmin extends HttpServlet {
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("value", value);
 		
-		return value;
 	}
 }
