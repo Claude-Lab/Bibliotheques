@@ -8,11 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.taglibs.standard.lang.jstl.test.PageContextImpl;
-
 import fr.lusseau.claude.bibliotheques.bll.BLLException;
 import fr.lusseau.claude.bibliotheques.bll.PersonneManager;
-import fr.lusseau.claude.bibliotheques.bo.Personne;
 
 /**
  * Servlet implementation class ServletAcceuilAdmin
@@ -29,6 +26,7 @@ public class ServletAcceuilAdmin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		nbrPersonne(request);
 	
 
@@ -51,14 +49,16 @@ public class ServletAcceuilAdmin extends HttpServlet {
 	 * 
 	 * @param request
 	 */
-	private void nbrPersonne(HttpServletRequest request) {
+	private int nbrPersonne(HttpServletRequest request) {
 		PersonneManager manager = new PersonneManager();
 		int value = 0;
 		try {
 			value = manager.compterPerson();
+			request.getAttribute("value");
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("value", value);
+		
+		return value;
 	}
 }

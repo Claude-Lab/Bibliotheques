@@ -43,14 +43,17 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 
 	private static final String sqlSelectByFirstName = "SELECT prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, id_Caution, id_Role, type_Personne"
 			+ "FROM PERSONNES WHERE nom_Personne LIKE ?";
-	
+
 	private static final String sqlSelectByMail = "SELECT prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, id_Caution, id_Role, type_Personne"
 			+ "FROM PERSONNES WHERE eMail_Personne = ?";
 
 	private static final String sqlCountPerson = "SELECT COUNT(*) FROM PERSONNES";
 
+	private static final String sqlLogin = "SELECT * FROM PERSONNES WHERE eMail_Personne = ? AND motDePasse_Personne = ?";
+
 	/**
 	 * Methode en charge de compter le nombres de personnes inscrites en base.
+	 * 
 	 * @return
 	 * @throws BusinessException
 	 * @throws SQLException
@@ -60,9 +63,9 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int nbPersonne = 0;
-		
+
 		try {
-			//con = JdbcTools.getConnection();
+			// con = JdbcTools.getConnection();
 			con = ConnectionProvider.getConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlCountPerson);
@@ -118,9 +121,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			pstmt.setString(10, data.getRole_Personne());
 			pstmt.setString(11, data.getType_Personne());
 			pstmt.setObject(12, data.getInscription_Personne());
-			
 
-			
 			int nbRows = pstmt.executeUpdate();
 			if (nbRows == 1) {
 				ResultSet rs = pstmt.getGeneratedKeys();
@@ -154,7 +155,6 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 		}
 	}
 
-
 	/**
 	 *
 	 * @return {@inheritDoc}
@@ -183,8 +183,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			pstmt.setInt(9, data.getCotisation_Personne());
 			pstmt.setString(10, data.getRole_Personne());
 			pstmt.setString(11, data.getType_Personne());
-		
-			
+
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -286,18 +285,22 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			while (rs.next()) {
 
 				if (TYPE_CLIENT.equalsIgnoreCase(rs.getString("type").trim())) {
-					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type").trim())) {
-					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				personnes.add(p);
 			}
@@ -353,13 +356,14 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			rs = pstmt.executeQuery();
 			Personne c = null;
 			while (rs.next()) {
-			
-				c = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-						rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-						rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-						rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
-				
+
+				c = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+						rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+						rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+						rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"),
+						rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class));
+
 				clients.add(c);
 			}
 		} catch (Exception e) {
@@ -411,13 +415,13 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			Personne s = null;
 			while (rs.next()) {
 
-				
-					s = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
-					
+				s = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+						rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+						rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+						rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"),
+						rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class));
+
 				salairie.add(s);
 
 			}
@@ -478,18 +482,22 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			if (rs.next()) {
 
 				if (TYPE_CLIENT.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 			}
 		} catch (Exception e) {
@@ -549,18 +557,22 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			while (rs.next()) {
 
 				if (TYPE_CLIENT.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					p = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				personnes.add(p);
 			}
@@ -598,9 +610,57 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 		}
 		return personnes;
 	}
-	
+
+	public Personne login(String mail_Personne, String motDePasse_Personne) throws BusinessException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Personne personne = null;
+
+		if ((mail_Personne == null) || (motDePasse_Personne == null)) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.CONNEXION_PERSONNE_NULL);
+			throw businessException;
+		}
+		try {
+			con = ConnectionProvider.getConnection();
+			pstmt = con.prepareStatement(sqlLogin);
+			pstmt.setString(1, mail_Personne);
+			pstmt.setString(2, motDePasse_Personne);
+			rs = pstmt.executeQuery();
+
+
+			if (rs.next()) {
+				personne = new Personne();
+						personne.setId_Personne(rs.getInt("id_Personne"));
+						personne.setPrenom_Personne(rs.getString("prenom_Personne"));
+						personne.setNom_Personne(rs.getString("nom_Personne"));
+						personne.setAdresse_Personne(rs.getString("adresse_Personne"));
+						personne.setCp_Personne(rs.getString("codePostal_Personne"));
+						personne.setVille_Personne(rs.getString("ville_Personne"));
+						personne.setMail_Personne(rs.getString("eMail_Personne"));
+						personne.setTel_Personne(rs.getString("tel_Personne"));
+						personne.setMotDePasse_Personne(rs.getString("motDePasse_Personne"));
+						personne.setCotisation_Personne(rs.getInt("id_Caution"));
+						personne.setRole_Personne(rs.getString("id_Role"));
+						personne.setType_Personne(rs.getString("type_Personne"));
+						personne.setInscription_Personne(rs.getObject("inscription_Personne", LocalDate.class));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("id_Personne == 0")) {
+				businessException.ajouterErreur(CodesResultatDAL.CONNEXION_PERSONNE__ECHEC);
+			}
+		}
+		return personne;
+	}
+
 	/**
-	 * Methode en charge de seletionner une personne par son eMail (connection session).
+	 * Methode en charge de seletionner une personne par son eMail (connection
+	 * session).
+	 * 
 	 * @param data
 	 * @return
 	 * @throws BusinessException
@@ -627,18 +687,22 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			if (rs.next()) {
 
 				if (TYPE_CLIENT.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"), rs.getString("nom_Personne"),
-							rs.getString("adresse_Personne"), rs.getString("codePostal_Personne"),
-							rs.getString("ville_Personne"), rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"), 
-							rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class)); 
+					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 			}
 		} catch (Exception e) {

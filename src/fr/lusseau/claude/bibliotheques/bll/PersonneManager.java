@@ -96,11 +96,11 @@ public class PersonneManager {
 	 * @return
 	 * @throws BLLException
 	 */
-	public Personne connexionPersonne(String data) throws BLLException {
+	public Personne connexionPersonne(String mail_Personne, String motDePasse_Personne) throws BLLException {
 		Personne personne = null;
 
 		try {
-			personne = daoPersonne.selectByMail(data);
+			personne = daoPersonne.login(mail_Personne, motDePasse_Personne);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

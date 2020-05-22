@@ -124,6 +124,8 @@ public abstract class CodesResultatDAL {
 	public static final int LECTURE_BIBLIOTHEQUE_BY_ID_ECHEC = 10128;
 	public static final int LECTURE_BIBLIOTHEQUE_BY_NAME_NULL = 10129;
 	public static final int LECTURE_BIBLIOTHEQUE_BY_NAME_ECHEC = 10130;
+	public static final int CONNEXION_PERSONNE_NULL = 10131;
+	public static final int CONNEXION_PERSONNE__ECHEC = 10132;
 	
 	
 	

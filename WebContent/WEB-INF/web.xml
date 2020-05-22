@@ -14,9 +14,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
-	<session-config>
-		<session-timeout>5</session-timeout>
-	</session-config>
 	<filter>
 		<filter-name>Set Character Encoding</filter-name>
 		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -61,6 +58,10 @@
 		<servlet-name>JSP_ACCUEIL_ADMIN</servlet-name>
 		<url-pattern>/accueilAdmin</url-pattern>
 	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
 
 
 </web-app>

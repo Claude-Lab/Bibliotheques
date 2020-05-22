@@ -88,5 +88,13 @@ public interface PersonneDAO {
 	 * @throws BusinessException
 	 */
 	public Personne selectByMail(String data) throws BusinessException;
+	
+	/**
+	 * Methode en charge de la connection des personnes.
+	 * @param data
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Personne login(String mail_Personne, String motDePasse_Personne) throws BusinessException;
 
 }

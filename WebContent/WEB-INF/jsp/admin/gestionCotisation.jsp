@@ -19,7 +19,7 @@
 		<!-- Main Content -->
 		<div id="content">
 
-			<%@include file="../includes/topbar.html"%>
+			<%@include file="../includes/topbar.jsp"%>
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">

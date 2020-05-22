@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page session="true" %>
 
 	
 <!DOCTYPE html>
@@ -17,7 +16,7 @@
 		<!-- Main Content -->
 		<div id="content">
 
-			<%@include file="../includes/topbar.html"%>
+			<%@include file="../includes/topbar.jsp"%>
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
@@ -42,7 +41,7 @@
 											de personnes en base</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
 										
-											<p><c:out value="${value}" /> personnes</p>
+											<p><c:out value="${nbrPersonne.value}" /> personnes</p>
 										</div>
 									</div>
 									<div class="col-auto">
