@@ -19,7 +19,7 @@ import fr.lusseau.claude.bibliotheques.forms.InsertForm;
 /**
  * Servlet implementation class ServletListePersonnes
  */
-@WebServlet("/gestionclient")
+@WebServlet("/admin/gestionclient")
 public class ServletGestionClients extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String VUE = "/WEB-INF/jsp/admin/gestionClient.jsp";

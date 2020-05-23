@@ -61,10 +61,10 @@
 						<h6 class="m-2 font-weight-bold text-primary">Ajouter un
 							salarié</h6>
 					</div>
-					
+
 
 					<div class="card-body">
-					<c:if test="${ !empty listeCodesErreur }">
+						<c:if test="${ !empty listeCodesErreur }">
 							<p style="color: red;">
 								<c:out value="ERREUR" />
 							</p>
@@ -137,9 +137,17 @@
 										class="form-control form-control-user" id="mail_Personne"
 										name="mail_Personne" placeholder="eMail..." required
 										pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-										value="<c:if test ="${!empty listeCodesErreur }">
-															${request.getMail_Personne}
-														</c:if>">
+										value="<c:choose>
+    									<c:when test="${value_mail<'1'}">
+    									<c:if test ="${!empty listeCodesErreur }">
+													${request.getMail_Personne} </c:if>
+       										 <br />
+  										</c:when>    
+   										<c:otherwise>
+     									   <c:out value="*${form.resultatInsert}f"></c:out> 
+												<br />
+										</c:otherwise>
+										</c:choose> ">
 								</div>
 								<div class="col-sm-6 mb-3 mb-sm-0">
 									<label for="tel_Personne"></label> <input type="tel"
@@ -203,7 +211,7 @@
 
 									</div>
 								</div>
-								
+
 								<div class="col-sm-6 mb-3 mb-sm-0">
 									<label for="type_Personne"></label> <input type="hidden"
 										class="form-control form-control-user" id="type_Personne"

@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<%@ include file="../includes/header.html"%>
+<%@ include file="includes/header.html"%>
 <body>
 
 	<!-- Navigation -->
-	<%@ include file="../includes/nav.html"%>
+	<%@ include file="includes/nav.html"%>
 
 	<!-- Page Header -->
-	<%@ include file="../includes/pageheader.html"%>
+	<%@ include file="includes/pageheader.html"%>
 
 	<!-- Main Content -->
 	<div class="container">
@@ -102,4 +102,4 @@
 
 	<hr>
 
-	<%@include file="../includes/footer.html"%>
+	<%@include file="includes/footer.html"%>

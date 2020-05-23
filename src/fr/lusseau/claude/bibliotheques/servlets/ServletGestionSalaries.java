@@ -21,7 +21,7 @@ import fr.lusseau.claude.bibliotheques.forms.InsertForm;
 /**
  * Servlet implementation class ServletListePersonnes
  */
-@WebServlet("/gestionsalarie")
+@WebServlet("/admin/gestionsalarie")
 public class ServletGestionSalaries extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String VUE = "/WEB-INF/jsp/admin/gestionSalarie.jsp";
@@ -61,6 +61,8 @@ public class ServletGestionSalaries extends HttpServlet {
 		listeRoles(request);
 		// Recherche des cautions
 		listeCautions(request);
+		// Recherche de mail identique
+//		checkMail(request);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
@@ -133,5 +135,20 @@ public class ServletGestionSalaries extends HttpServlet {
 
 		request.setAttribute("cautions", cautions);
 	}
+//	
+//	private void checkMail(HttpServletRequest request) {
+//		PersonneManager manager = new PersonneManager();
+//		String value_mail = request.getParameter("mail_Personne");
+//		@SuppressWarnings("unused")
+//		Personne personne = new Personne();
+//		try {
+//			personne = manager.rechercherMail(value_mail);
+//			request.getAttribute("value");
+//		} catch (BLLException e) {
+//			e.printStackTrace();
+//		}
+//		request.setAttribute("value_mail", value_mail);
+//		
+//	}
 
 }

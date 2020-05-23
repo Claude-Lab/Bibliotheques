@@ -17,7 +17,7 @@ import fr.lusseau.claude.bibliotheques.forms.InsertForm;
 /**
  * Servlet implementation class ServlztAfficherRole
  */
-@WebServlet("/gestionrole")
+@WebServlet("/admin/gestionrole")
 public class ServletGestionRole extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String VUE = "/WEB-INF/jsp/admin/gestionRole.jsp";

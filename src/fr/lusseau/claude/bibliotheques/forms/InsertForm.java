@@ -41,9 +41,11 @@ import fr.lusseau.claude.bibliotheques.servlets.CodesResultatServlets;
 public class InsertForm {
 
 	private String resultatInsert;
+	private String resultatMail;
 
 	/**
 	 * Methode en charge de valider l'enregistrement d'un type de cotisation.
+	 * 
 	 * @param request
 	 */
 	public void validerCotisation(HttpServletRequest request) {
@@ -82,9 +84,10 @@ public class InsertForm {
 			}
 		}
 	}
-	
+
 	/**
 	 * Methode en charge de Valider l'enregistrement d'un client.
+	 * 
 	 * @param request
 	 */
 	public void validerClient(HttpServletRequest request) {
@@ -99,9 +102,10 @@ public class InsertForm {
 		String role_Personne = request.getParameter("role_Personne");
 		String type_Personne = "CLIENT";
 		int cotisation_Personne = Integer.parseInt(request.getParameter("cotisation_Personne"));
-		LocalDate inscription_Personne = LocalDate.now();//LocalDate.parse(request.getParameter("inscription_Personne"));
+		LocalDate inscription_Personne = LocalDate.now();// LocalDate.parse(request.getParameter("inscription_Personne"));
 		@SuppressWarnings("unused")
 		Personne value = null;
+		Personne value_Mail = null;
 
 		if ((prenom_Personne != null) && (nom_Personne != null)) {
 			try {
@@ -117,9 +121,22 @@ public class InsertForm {
 				} catch (BusinessException e) {
 					e.printStackTrace();
 				}
-			
+
+				if (mail_Personne != null) {
+					try {
+						PersonneManager man = new PersonneManager();
+						value_Mail = man.rechercherMail(mail_Personne);
+					} catch (BLLException e) {
+						e.printStackTrace();
+					}
+
+					if (value_Mail != null) {
+						resultatMail = "Cet eMail est déjà utilisé";
+					}
+				}
+
 				resultatInsert = "Nouvelle entrée d'un salarié REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -138,9 +155,10 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'un salairé.
+	 * 
 	 * @param request
 	 */
 	public void validerSalarie(HttpServletRequest request) {
@@ -155,7 +173,7 @@ public class InsertForm {
 		String type_Personne = "SALARIE";
 		String role_Personne = request.getParameter("role_Personne");
 		int cotisation_Personne = Integer.parseInt(request.getParameter("cotisation_Personne"));
-		LocalDate inscription_Personne = LocalDate.now();//LocalDate.parse(request.getParameter("inscription_Personne"));
+		LocalDate inscription_Personne = LocalDate.now();// LocalDate.parse(request.getParameter("inscription_Personne"));
 		@SuppressWarnings("unused")
 		Personne value = null;
 
@@ -173,9 +191,9 @@ public class InsertForm {
 				} catch (BusinessException e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un salarié REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -194,9 +212,10 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'une bibliothèque.
+	 * 
 	 * @param request
 	 */
 	public void validerBibliotheque(HttpServletRequest request) {
@@ -213,13 +232,14 @@ public class InsertForm {
 			try {
 				BibliothequeManager manager = new BibliothequeManager();
 				try {
-					value = manager.addBibliotheque(nom_Bibliotheque, adresse_Bibliotheque, cp_Bibliotheque, ville_Bibliotheque, mail_Bibliotheque, tel_Bibliotheque);
+					value = manager.addBibliotheque(nom_Bibliotheque, adresse_Bibliotheque, cp_Bibliotheque,
+							ville_Bibliotheque, mail_Bibliotheque, tel_Bibliotheque);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'une bibliothèque REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_BIBLIOTHEQUE_ERREUR);
@@ -241,6 +261,7 @@ public class InsertForm {
 
 	/**
 	 * Methode en charge de valider l'enregistrement d'une bibliothèque.
+	 * 
 	 * @param request
 	 */
 	public void validerEditeur(HttpServletRequest request) {
@@ -258,14 +279,14 @@ public class InsertForm {
 			try {
 				EditeurManager manager = new EditeurManager();
 				try {
-					value = manager.addEditeur(nom_Editeur, adresse_Editeur,
-							cp_Editeur, ville_Editeur, mail_Editeur, pays_Editeur, tel_Editeur);
+					value = manager.addEditeur(nom_Editeur, adresse_Editeur, cp_Editeur, ville_Editeur, mail_Editeur,
+							pays_Editeur, tel_Editeur);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un éditeur REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -284,14 +305,15 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'un etat.
+	 * 
 	 * @param request
 	 */
 	public void validerEtat(HttpServletRequest request) {
 		String usage_Etat = request.getParameter("usage_Etat");
-		
+
 		@SuppressWarnings("unused")
 		Etat value = null;
 
@@ -303,9 +325,9 @@ public class InsertForm {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un état d'usure REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -324,14 +346,15 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'un Role.
+	 * 
 	 * @param request
 	 */
 	public void validerRole(HttpServletRequest request) {
 		String type_Role = request.getParameter("type_Role");
-		
+
 		@SuppressWarnings("unused")
 		Role value = null;
 
@@ -343,9 +366,9 @@ public class InsertForm {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un rôle REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -364,14 +387,15 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'un auteur.
+	 * 
 	 * @param request
 	 */
 	public void validerAuteur(HttpServletRequest request) {
 		String nom_Auteur = request.getParameter("nom_Auteur");
-		
+
 		@SuppressWarnings("unused")
 		Auteur value = null;
 
@@ -383,9 +407,9 @@ public class InsertForm {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un auteur REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -404,9 +428,10 @@ public class InsertForm {
 		}
 		request.setAttribute("resultatInsert", resultatInsert);
 	}
-	
+
 	/**
 	 * Methode en charge de valider l'enregistrement d'un livre.
+	 * 
 	 * @param request
 	 */
 	public void validerLivre(HttpServletRequest request) {
@@ -418,8 +443,7 @@ public class InsertForm {
 		String nom_Bibliotheque = request.getParameter("nom_Bibliotheque");
 		String nom_Editeur = request.getParameter("nom_Editeur");
 		String usage_Etat = request.getParameter("usage_Etat");
-		
-		
+
 		@SuppressWarnings("unused")
 		Livre value = null;
 
@@ -427,13 +451,14 @@ public class InsertForm {
 			try {
 				LivreManager manager = new LivreManager();
 				try {
-					value = manager.addLivre(titre_Livre, dateAchat_Livre, description_Livre, prenom_Nom_Auteur, isbn_Ecrit, nom_Bibliotheque, nom_Editeur, usage_Etat );
+					value = manager.addLivre(titre_Livre, dateAchat_Livre, description_Livre, prenom_Nom_Auteur,
+							isbn_Ecrit, nom_Bibliotheque, nom_Editeur, usage_Etat);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+
 				resultatInsert = "Nouvelle entrée d'un livre REUSSIE ! ";
-				
+
 			} catch (NumberFormatException e) {
 				List<Integer> listeCodesErreur = new ArrayList<>();
 				listeCodesErreur.add(CodesResultatServlets.FORMAT_SALARIE_VALEUR_ERREUR);
@@ -469,6 +494,24 @@ public class InsertForm {
 	 */
 	public void setresultatInsert(String resultatInsert) {
 		this.resultatInsert = resultatInsert;
+	}
+
+	/**
+	 * Guetter pour resultatMail.
+	 * 
+	 * @return the resultatMail
+	 */
+	public String getResultatMail() {
+		return resultatMail;
+	}
+
+	/**
+	 * Setter pour resultatMail.
+	 * 
+	 * @param resultatMail the resultatMail to set
+	 */
+	public void setResultatMail(String resultatMail) {
+		this.resultatMail = resultatMail;
 	}
 
 }

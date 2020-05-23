@@ -26,8 +26,8 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/public/connexion.jsp").forward(request, response);
+
 	}
 
 	/**
@@ -36,7 +36,6 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		connexion(request, response);
 
 	}
@@ -62,14 +61,22 @@ public class ServletConnexion extends HttpServlet {
 
 			if (sessionPersonne != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("sessionPersonne", sessionPersonne);
-				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin/accueilAdmin.jsp").forward(request,
-						response);
+				
+				if ("SALARIE".equals(sessionPersonne.getType_Personne()))  {
+
+					session.setAttribute("sessionPersonne", sessionPersonne);
+					response.sendRedirect(request.getContextPath() + "/admin/accueil");
+
+				}
+				if ("CLIENT".equals(sessionPersonne.getType_Personne())) {
+					session.setAttribute("sessionPersonne", sessionPersonne);
+					response.sendRedirect(request.getContextPath() + "/client/accueil");
+				}
+
 			} else {
 				String message = "Mail ou mot de passe invalide !";
 				request.setAttribute("message", message);
-				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/public/index.jsp").forward(request,
-						response);
+				response.sendRedirect(request.getContextPath() + "/");
 			}
 
 		} catch (BLLException e) {

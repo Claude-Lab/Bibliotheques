@@ -51,6 +51,50 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 
 	private static final String sqlLogin = "SELECT * FROM PERSONNES WHERE eMail_Personne = ? AND motDePasse_Personne = ?";
 
+	private static final String sqlSearchMail = "SELECT eMail_Personne, prenom_Personne, nom_Personne FROM PERSONNES WHERE eMail_Personne = ?";
+
+	/**
+	 * Methode en charge de chercher si un mail existe déjaà en base.
+	 * 
+	 * @param mail_Personne
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Personne rechercherMail(String mail_Personne) throws BusinessException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Personne mail = null;
+
+		if (mail_Personne == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.CONNEXION_PERSONNE_NULL);
+			throw businessException;
+		}
+		try {
+			con = ConnectionProvider.getConnection();
+			pstmt = con.prepareStatement(sqlSearchMail);
+			pstmt.setString(1, mail_Personne);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				mail = new Personne();
+				mail.setPrenom_Personne(rs.getString("prenom_Personne"));
+				mail.setNom_Personne(rs.getString("nom_Personne"));
+				mail.setMail_Personne(rs.getString("eMail_Personne"));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("id_Personne == 0")) {
+				businessException.ajouterErreur(CodesResultatDAL.CONNEXION_PERSONNE__ECHEC);
+			}
+		}
+		return mail;
+
+	}
+
 	/**
 	 * Methode en charge de compter le nombres de personnes inscrites en base.
 	 * 
@@ -629,23 +673,22 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			pstmt.setString(2, motDePasse_Personne);
 			rs = pstmt.executeQuery();
 
-
 			if (rs.next()) {
 				personne = new Personne();
-						personne.setId_Personne(rs.getInt("id_Personne"));
-						personne.setPrenom_Personne(rs.getString("prenom_Personne"));
-						personne.setNom_Personne(rs.getString("nom_Personne"));
-						personne.setAdresse_Personne(rs.getString("adresse_Personne"));
-						personne.setCp_Personne(rs.getString("codePostal_Personne"));
-						personne.setVille_Personne(rs.getString("ville_Personne"));
-						personne.setMail_Personne(rs.getString("eMail_Personne"));
-						personne.setTel_Personne(rs.getString("tel_Personne"));
-						personne.setMotDePasse_Personne(rs.getString("motDePasse_Personne"));
-						personne.setCotisation_Personne(rs.getInt("id_Caution"));
-						personne.setRole_Personne(rs.getString("id_Role"));
-						personne.setType_Personne(rs.getString("type_Personne"));
-						personne.setInscription_Personne(rs.getObject("inscription_Personne", LocalDate.class));
-				
+				personne.setId_Personne(rs.getInt("id_Personne"));
+				personne.setPrenom_Personne(rs.getString("prenom_Personne"));
+				personne.setNom_Personne(rs.getString("nom_Personne"));
+				personne.setAdresse_Personne(rs.getString("adresse_Personne"));
+				personne.setCp_Personne(rs.getString("codePostal_Personne"));
+				personne.setVille_Personne(rs.getString("ville_Personne"));
+				personne.setMail_Personne(rs.getString("eMail_Personne"));
+				personne.setTel_Personne(rs.getString("tel_Personne"));
+				personne.setMotDePasse_Personne(rs.getString("motDePasse_Personne"));
+				personne.setCotisation_Personne(rs.getInt("id_Caution"));
+				personne.setRole_Personne(rs.getString("id_Role"));
+				personne.setType_Personne(rs.getString("type_Personne"));
+				personne.setInscription_Personne(rs.getObject("inscription_Personne", LocalDate.class));
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

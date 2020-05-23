@@ -30,7 +30,7 @@
 
 	<filter>
 		<filter-name>RestrictionFilter</filter-name>
-		<filter-class>fr.lusseau.claude.bibliotheques.filters.RestrictionFilter</filter-class>
+		<filter-class>fr.lusseau.claude.bibliotheques.filters.FiltreAccesInterdit</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RestrictionFilter</filter-name>
@@ -38,6 +38,8 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
+	
 
 
 	<listener>
@@ -51,12 +53,12 @@
 	</jsp-config>
 
 	<servlet>
-		<servlet-name>INDEX</servlet-name>
-		<jsp-file>/WEB-INF/jsp/public/index.jsp</jsp-file>
+	<servlet-name>INDEX</servlet-name>
+	<jsp-file>/WEB-INF/jsp/public/index.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>INDEX</servlet-name>
-		<url-pattern>/index</url-pattern>
+	<servlet-name>INDEX</servlet-name>
+	<url-pattern>/index</url-pattern>
 	</servlet-mapping>
 
 <!-- 	<servlet> -->
@@ -65,7 +67,7 @@
 <!-- 	</servlet> -->
 <!-- 	<servlet-mapping> -->
 <!-- 		<servlet-name>JSP_ADMIN</servlet-name> -->
-<!-- 		<url-pattern>/admin</url-pattern> -->
+<!-- 		<url-pattern>/admin/acceuil</url-pattern> -->
 <!-- 	</servlet-mapping> -->
 
 	<session-config>

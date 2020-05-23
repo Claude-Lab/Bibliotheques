@@ -14,7 +14,7 @@ import fr.lusseau.claude.bibliotheques.forms.DeletebyId;
 /**
  * Servlet implementation class SupprimerCotisation
  */
-@WebServlet("/supprimer")
+@WebServlet("/admin/supprimer")
 public class ServletSuppression extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class ServletSuppression extends HttpServlet {
 			// exportation de la suppression par forulaire
 			DeletebyId delete = new DeletebyId();
 			delete.supprimerPersonne(request);
-			RequestDispatcher rd = request.getRequestDispatcher("/gestionsalarie");
+			RequestDispatcher rd = request.getRequestDispatcher("gestionsalarie");
 			rd.forward(request, response);
 
 			// Condition de redirection après suppression.

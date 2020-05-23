@@ -16,6 +16,13 @@ import fr.lusseau.claude.bibliotheques.bo.Personne;
 public interface PersonneDAO {
 	
 	/**
+	 * Methode en charge de chercher si un mail existe déjaà en base.
+	 * @param mail_Personne
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Personne rechercherMail(String mail_Personne) throws BusinessException;
+	/**
 	 * Methode en charge de lister tous les clients.
 	 * @return
 	 * @throws BusinessException

@@ -91,6 +91,26 @@ public class PersonneManager {
 		}
 		return value;
 	}
+	
+	/**
+	 * Methode en charge de compter le nombre d'inscrit en base.
+	 * 
+	 * @return
+	 * @throws BLLException
+	 */
+	public Personne rechercherMail(String mail_Personne) throws BLLException {
+		Personne value = null;
+		try {
+			value = daoPersonne.rechercherMail(mail_Personne);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (value != null) {
+			System.out.println(value);
+		}
+		return value;
+	}
 
 	/**
 	 * @return
