@@ -29,12 +29,23 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>RestrictionFilter</filter-name>
-		<filter-class>fr.lusseau.claude.bibliotheques.filters.FiltreAccesInterdit</filter-class>
+		<filter-name>RestrictionFilterAdmin</filter-name>
+		<filter-class>fr.lusseau.claude.bibliotheques.filters.FiltreAccesInterditAdmin</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>RestrictionFilter</filter-name>
+		<filter-name>RestrictionFilterAdmin</filter-name>
 		<url-pattern>/WEB-INF/jps/admin/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>RestrictionFilterClient</filter-name>
+		<filter-class>fr.lusseau.claude.bibliotheques.filters.FiltreAccesInterditClient</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RestrictionFilterClient</filter-name>
+		<url-pattern>/WEB-INF/jps/client/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>

@@ -9,8 +9,12 @@
 <%@include file="../includes/header.html"%>
 
 
-
-	<body>
+<body>
 <h1>Ca Marche !!!</h1>
+<ul>
+<li>${sessionPersonne.prenom_Personne}</li>
+<li>${sessionPersonne.nom_Personne}</li>
+<li>${sessionPersonne.type_Personne}</li>
+</ul>
 </body>
 </html>

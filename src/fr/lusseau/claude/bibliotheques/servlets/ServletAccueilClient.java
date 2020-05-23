@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.lusseau.claude.bibliotheques.bll.BLLException;
-import fr.lusseau.claude.bibliotheques.bll.PersonneManager;
+import fr.lusseau.claude.bibliotheques.bo.Personne;
 
 /**
  * Servlet implementation class ServletAcceuilAdmin
@@ -29,11 +28,11 @@ public class ServletAccueilClient extends HttpServlet {
 
 		@SuppressWarnings("unused")
 		HttpSession session = request.getSession();
-		nbrPersonne(request);
-	
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -44,21 +43,4 @@ public class ServletAccueilClient extends HttpServlet {
 		doGet(request, response);
 	}
 
-	/**
-	 * Methode en charge de compter le nombre de personne dans la base.
-	 * 
-	 * @param request
-	 */
-	private void nbrPersonne(HttpServletRequest request) {
-		PersonneManager manager = new PersonneManager();
-		int value = 0;
-		try {
-			value = manager.compterPerson();
-			request.getAttribute("value");
-		} catch (BLLException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("value", value);
-		
-	}
 }
