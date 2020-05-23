@@ -32,7 +32,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 	private static final String sqlSelectAllClients = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, type_Personne, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role WHERE PERSONNES.type_Personne = \'"
 			+ TYPE_CLIENT + "\' ORDER BY id_Personne DESC";
 
-	private static final String sqlSelectAllSalaries = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, type_Personne, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role WHERE PERSONNES.type_Personne = \'"
+	private static final String sqlSelectAllSalaries = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, type_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, inscription_Personne FROM PERSONNES LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution WHERE PERSONNES.type_Personne = \'"
 			+ TYPE_SALARIE + "\' ORDER BY id_Personne DESC";
 
 	private static final String sqlUpdate = "UPDATE PERSONNES SET prenom_Personne=?,nom_Personne=?,adresse_Personne=?,codePostal_Personne=?,ville_Personne=?,eMail_Personne=?,tel_Personne=?,motDePasse_Personne=?, id_Caution=?, id_Role=?, type_Personne=?  where id_Personne=?";
@@ -334,7 +334,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type").trim())) {
@@ -343,7 +343,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				personnes.add(p);
@@ -405,8 +405,9 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 						rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
 						rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 						rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"),
-						rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class));
+						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+						rs.getString("type_Personne"), rs.getString("type_Role"),
+						rs.getObject("inscription_Personne", LocalDate.class));
 
 				clients.add(c);
 			}
@@ -463,8 +464,9 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 						rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
 						rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 						rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"), rs.getString("type_Role"),
-						rs.getString("type_Personne"), rs.getObject("inscription_Personne", LocalDate.class));
+						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+						rs.getString("type_Personne"), rs.getString("type_Role"),
+						rs.getObject("inscription_Personne", LocalDate.class));
 
 				salairie.add(s);
 
@@ -531,7 +533,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
@@ -540,7 +542,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 			}
@@ -606,7 +608,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
@@ -615,7 +617,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				personnes.add(p);
@@ -735,7 +737,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
@@ -744,7 +746,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
 							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
 							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Role"), rs.getString("type_Personne"),
+							rs.getString("type_Personne"), rs.getString("type_Role"),
 							rs.getObject("inscription_Personne", LocalDate.class));
 				}
 			}
