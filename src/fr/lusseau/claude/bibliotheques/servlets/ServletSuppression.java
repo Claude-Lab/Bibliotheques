@@ -29,11 +29,9 @@ public class ServletSuppression extends HttpServlet {
 			// exportation de la suppression par forulaire
 			DeletebyId delete = new DeletebyId();
 			delete.supprimerPersonne(request);
-			RequestDispatcher rd = request.getRequestDispatcher("gestionsalarie");
-			rd.forward(request, response);
 
-			// Condition de redirection après suppression.
-			//redirectionPersonne(request, response);
+			//Condition de redirection après suppression.
+			redirectionPersonne(request, response);
 		}
 
 		if (request.getParameter("id_Cotisation") != null) {
@@ -129,17 +127,16 @@ public class ServletSuppression extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unused")
 	private void redirectionPersonne(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		try {
 			if ("SALARIE".equals(request.getParameter("type_Personne").trim())) {
-				RequestDispatcher rd = request.getRequestDispatcher("/gestionsalarie");
+				RequestDispatcher rd = request.getRequestDispatcher("gestionsalarie");
 				rd.forward(request, response);
 			}
 			if ("CLIENT".equals(request.getParameter("type_Personne").trim())) {
-				RequestDispatcher rd = request.getRequestDispatcher("/gestionclient");
+				RequestDispatcher rd = request.getRequestDispatcher("gestionclient");
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
