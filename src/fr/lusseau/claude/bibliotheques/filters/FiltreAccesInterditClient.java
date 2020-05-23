@@ -17,26 +17,25 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FiltreAccesInterdit
  */
-@WebFilter(urlPatterns = "/WEB-INF/jsp/admin/*",
+@WebFilter(urlPatterns = "/WEB-INF/jsp/client/*",
 			dispatcherTypes = {
 					DispatcherType.REQUEST,
 					DispatcherType.INCLUDE,
 					DispatcherType.FORWARD,
 					DispatcherType.ERROR
 			})
-public class FiltreAccesInterdit implements Filter {
+public class FiltreAccesInterditClient implements Filter {
 
 	public static final String ATT_SESSION_USER = "sessionPersonne";
 	public static final String ACCES_CLIENT = "/client/accueil";
 	public static final String ACCES_PUBLIC = "/index";
 	public static final String TYPE = "type_Personne";
-	public static final String TYPE_SALARIE = "SALARIE";
 	public static final String TYPE_CLIENT = "CLIENT";
 	
     /**
      * Default constructor. 
      */
-    public FiltreAccesInterdit() {
+    public FiltreAccesInterditClient() {
         // TODO Auto-generated constructor stub
     }
 
@@ -58,7 +57,7 @@ public class FiltreAccesInterdit implements Filter {
 		
 		/* Non-filtrage des ressources statiques */
         String chemin = request.getRequestURI().substring( request.getContextPath().length() );
-        if ( chemin.startsWith( "/WEB-INF/jsp/inc" ) ) {
+        if ( chemin.startsWith( "/WEB-INF/jsp/includes" ) ) {
             chain.doFilter( request, response );
             return;
         }
@@ -70,10 +69,6 @@ public class FiltreAccesInterdit implements Filter {
          */
         if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
             /* Redirection vers la page publique */
-        	response.sendRedirect( request.getContextPath() + ACCES_PUBLIC);
-        	
-        } else if ( request.getSession().getAttribute(TYPE) == TYPE_CLIENT) {
-        	/* Redirection vers la page client */
         	response.sendRedirect( request.getContextPath() + ACCES_PUBLIC);
         } else {
             /* Affichage de la page restreinte */
