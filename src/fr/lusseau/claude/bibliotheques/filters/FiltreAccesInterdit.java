@@ -27,6 +27,11 @@ import javax.servlet.http.HttpSession;
 public class FiltreAccesInterdit implements Filter {
 
 	public static final String ATT_SESSION_USER = "sessionPersonne";
+	public static final String ACCES_CLIENT = "/client/accueil";
+	public static final String ACCES_PUBLIC = "/index";
+	public static final String TYPE = "type_Personne";
+	public static final String TYPE_SALARIE = "SALARIE";
+	public static final String TYPE_CLIENT = "CLIENT";
 	
     /**
      * Default constructor. 
@@ -49,6 +54,7 @@ public class FiltreAccesInterdit implements Filter {
 		/* Cast des objets request et response */
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		HttpSession session = request.getSession();
 		
 		/* Non-filtrage des ressources statiques */
         String chemin = request.getRequestURI().substring( request.getContextPath().length() );
@@ -57,16 +63,18 @@ public class FiltreAccesInterdit implements Filter {
             return;
         }
 
-		/* Récupération de la session depuis la requête */
-		HttpSession session = request.getSession();
 
 		/**
          * Si l'objet utilisateur n'existe pas dans la session en cours, alors
          * l'utilisateur n'est pas connecté.
          */
-        if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
+        if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
             /* Redirection vers la page publique */
-        	response.sendRedirect( request.getContextPath() + "/");
+        	response.sendRedirect( request.getContextPath() + ACCES_PUBLIC);
+        	
+        } else if ( request.getSession().getAttribute(TYPE) == TYPE_CLIENT) {
+        	/* Redirection vers la page client */
+        	response.sendRedirect( request.getContextPath() + ACCES_PUBLIC);
         } else {
             /* Affichage de la page restreinte */
             chain.doFilter( request, response );

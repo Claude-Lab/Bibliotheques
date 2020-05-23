@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page session="true" %>
 
 	
 <!DOCTYPE html>
@@ -41,7 +42,7 @@
 											de personnes en base</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
 										
-											<p><c:out value="${value}" /> personnes</p>
+											<p><c:out value="${valuePersonnes}" /> personnes</p>
 										</div>
 									</div>
 									<div class="col-auto">
@@ -59,9 +60,8 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings
-											(Annual)</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+											class="text-xs font-weight-bold text-success text-uppercase mb-1">Nombre d'euvres en base</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800"><p><c:out value="${valueLivres}" /> oeuvres</p></div>
 									</div>
 									<div class="col-auto">
 										<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -78,10 +78,10 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+											class="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre d'emprunt en cours</div>
 										<div class="row no-gutters align-items-center">
 											<div class="col-auto">
-												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><p><c:out value="${valueEmprunt}" /> emprunts</p></div>
 											</div>
 											<div class="col">
 												<div class="progress progress-sm mr-2">
@@ -107,9 +107,8 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending
-											Requests</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Cumul des cotisations</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800"><p><c:out value="${valueCotisation}" /> €</p></div>
 									</div>
 									<div class="col-auto">
 										<i class="fas fa-comments fa-2x text-gray-300"></i>

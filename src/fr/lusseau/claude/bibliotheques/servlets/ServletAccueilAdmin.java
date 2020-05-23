@@ -51,14 +51,14 @@ public class ServletAccueilAdmin extends HttpServlet {
 	 */
 	private void nbrPersonne(HttpServletRequest request) {
 		PersonneManager manager = new PersonneManager();
-		int value = 0;
+		int valuePersonnes = 0;
 		try {
-			value = manager.compterPerson();
+			valuePersonnes = manager.compterPerson();
 			request.getAttribute("value");
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("value", value);
+		request.setAttribute("valuePersonnes", valuePersonnes);
 		
 	}
 }
