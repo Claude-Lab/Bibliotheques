@@ -67,7 +67,7 @@ public class FiltreAccesInterditAdmin implements Filter {
 
 		} else if ((((Personne) session.getAttribute(ATT_SESSION_USER)).getType_Personne().equals(TYPE_CLIENT))) {
 			// Redirection vers la page de connexion.
-			response.sendRedirect(request.getContextPath() + INTERDIT);
+			response.sendRedirect(request.getContextPath() + ACCES_CLIENT);
 
 		} else {
 			// Affichage de la page admin.

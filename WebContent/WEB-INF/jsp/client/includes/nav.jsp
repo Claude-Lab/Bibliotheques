@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-
-
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="accueil">Bibliothèque</a>
@@ -23,12 +22,12 @@ pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="deconnexion">Se deconnecter</a>
           </li>
-          <c:if test="${(sessionPersonne.type_Personne) == SALARIE}"> >
+          <c:if test="${(sessionPersonne.type_Personne) == 'SALARIE'}"> >
          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="admin/accueil">
+            <a class="nav-link js-scroll-trigger" href="/Bibliotheques/admin/accueil">
           <c:out value="Admin"/></a>
           </li>
-          </c:out></c:if>
+          </c:if>
         </ul>
       </div>
     </div>

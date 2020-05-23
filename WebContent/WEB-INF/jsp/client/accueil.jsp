@@ -7,7 +7,7 @@
 <body id="page-top">
 
 	<!-- Navigation -->
-	<%@ include file="includes/nav.html"%>
+	<%@ include file="includes/nav.jsp"%>
 
 	<!-- Page Header -->
 	<%@ include file="includes/pageheader.html"%>
