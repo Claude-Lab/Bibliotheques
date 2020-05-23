@@ -53,7 +53,6 @@ public class FiltreAccesInterditAdmin implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		HttpSession session = request.getSession();
-		Personne user = (Personne) session.getAttribute(TYPE);
 
 		/* Non-filtrage des ressources statiques */
 		String chemin = request.getRequestURI().substring(request.getContextPath().length());
@@ -62,15 +61,15 @@ public class FiltreAccesInterditAdmin implements Filter {
 			return;
 		}
 
-		if (user == null ) {
+		if (session.getAttribute(ATT_SESSION_USER) == null) {
 			// Redirection vers la page de connexion.
 			response.sendRedirect(request.getContextPath() + INTERDIT);
-			
-		} else if (user != null && user.getType_Personne().equals(TYPE_CLIENT)) {
+
+		} else if ((((Personne) session.getAttribute(ATT_SESSION_USER)).getType_Personne().equals(TYPE_CLIENT))) {
 			// Redirection vers la page de connexion.
 			response.sendRedirect(request.getContextPath() + INTERDIT);
-			
-		} else if (user != null && user.getType_Personne().equals(TYPE_SALARIE)) {
+
+		} else {
 			// Affichage de la page admin.
 			chain.doFilter(request, response);
 		}

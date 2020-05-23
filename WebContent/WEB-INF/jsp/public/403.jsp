@@ -35,7 +35,7 @@
     <use xlink:href="#tornillo" y="60"></use>
   </g>
 </svg>
-	<h1>Mais que fais-tu par là ?</h1>
+	<h1>Que fais-tu ici ?</h1>
 	<h2>
 		Retourne de suite à <a href="index">l'accueil !</a>
 	</h2>

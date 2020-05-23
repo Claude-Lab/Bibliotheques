@@ -17,27 +17,19 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FiltreAccesInterdit
  */
-@WebFilter(urlPatterns = "/WEB-INF/jsp/client/*",
-			dispatcherTypes = {
-					DispatcherType.REQUEST,
-					DispatcherType.INCLUDE,
-					DispatcherType.FORWARD,
-					DispatcherType.ERROR
-			})
+@WebFilter(urlPatterns = "/WEB-INF/jsp/client/*", dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.INCLUDE,
+		DispatcherType.FORWARD, DispatcherType.ERROR })
 public class FiltreAccesInterditClient implements Filter {
 
 	public static final String ATT_SESSION_USER = "sessionPersonne";
-	public static final String ACCES_CLIENT = "/client/accueil";
-	public static final String ACCES_PUBLIC = "/index";
-	public static final String TYPE = "type_Personne";
-	public static final String TYPE_CLIENT = "CLIENT";
-	
-    /**
-     * Default constructor. 
-     */
-    public FiltreAccesInterditClient() {
-        // TODO Auto-generated constructor stub
-    }
+	public static final String INTERDIT = "/403";
+
+	/**
+	 * Default constructor.
+	 */
+	public FiltreAccesInterditClient() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -49,31 +41,31 @@ public class FiltreAccesInterditClient implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+			throws IOException, ServletException {
 		/* Cast des objets request et response */
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		HttpSession session = request.getSession();
-		
-		/* Non-filtrage des ressources statiques */
-        String chemin = request.getRequestURI().substring( request.getContextPath().length() );
-        if ( chemin.startsWith( "/WEB-INF/jsp/includes" ) ) {
-            chain.doFilter( request, response );
-            return;
-        }
 
+		/* Non-filtrage des ressources statiques */
+		String chemin = request.getRequestURI().substring(request.getContextPath().length());
+		if (chemin.startsWith("/WEB-INF/jsp/includes")) {
+			chain.doFilter(request, response);
+			return;
+		}
 
 		/**
-         * Si l'objet utilisateur n'existe pas dans la session en cours, alors
-         * l'utilisateur n'est pas connecté.
-         */
-        if ( request.getSession().getAttribute( ATT_SESSION_USER ) == null ) {
-            /* Redirection vers la page publique */
-        	response.sendRedirect( request.getContextPath() + ACCES_PUBLIC);
-        } else {
-            /* Affichage de la page restreinte */
-            chain.doFilter( request, response );
-        }
+		 * Si l'objet utilisateur n'existe pas dans la session en cours, alors
+		 * l'utilisateur n'est pas connecté.
+		 */
+		if (session.getAttribute(ATT_SESSION_USER) == null) {
+			// Redirection vers la page de connexion.
+			response.sendRedirect(request.getContextPath() + INTERDIT);
+		} else {
+			// Affichage de la page admin.
+			chain.doFilter(request, response);
+		}
 	}
 
 	/**
