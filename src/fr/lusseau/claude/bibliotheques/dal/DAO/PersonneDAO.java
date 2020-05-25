@@ -47,6 +47,7 @@ public interface PersonneDAO {
 	/**
 	 * Methode en charge de mettre à jours une personne.
 	 * @param data
+	 * @return 
 	 * @throws BusinessException
 	 */
 	public void update(Personne data) throws BusinessException;

@@ -1,4 +1,4 @@
-package fr.lusseau.claude.bibliotheques.servlets;
+package fr.lusseau.claude.bibliotheques.forms;
 
 import java.io.IOException;
 
@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.lusseau.claude.bibliotheques.forms.DeletebyId;
 
 /**
  * Servlet implementation class SupprimerCotisation

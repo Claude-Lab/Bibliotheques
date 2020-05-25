@@ -38,15 +38,15 @@
 					<br>
 
 					<ul>
-						<li><b>Mon identifiant : </b>${sessionPersonne.id_Personne }</li>
-						<li><b>Mon nom : </b>${sessionPersonne.nom_Personne }</li>
-						<li><b>Mon prenom : </b>${sessionPersonne.prenom_Personne }</li>
-						<li><b>Mon Adresse : </b>${sessionPersonne.adresse_Personne }
+						<li><b>Identifiant : </b>${sessionPersonne.id_Personne }</li>
+						<li><b>Nom : </b>${sessionPersonne.nom_Personne }</li>
+						<li><b>Prenom : </b>${sessionPersonne.prenom_Personne }</li>
+						<li><b>Adresse : </b>${sessionPersonne.adresse_Personne }
 							- ${sessionPersonne.cp_Personne }
 							${sessionPersonne.ville_Personne }</li>
-						<li><b>Mon eMail : </b>${sessionPersonne.mail_Personne }</li>
-						<li><b>Mon Téléphone : </b>${sessionPersonne.tel_Personne }</li>
-						<li><b>Ma cotisation : </b>${sessionPersonne.cotisation_Personne }
+						<li><b>eMail : </b>${sessionPersonne.mail_Personne }</li>
+						<li><b>Téléphone : </b>${sessionPersonne.tel_Personne }</li>
+						<li><b>Cotisation : </b>${sessionPersonne.cotisation_Personne }
 							€</li>
 						<c:if test="${! empty sessionPersonne.role_Personne}">
 							<li><b>Mon rôle sur le site : </b>${sessionPersonne.role_Personne }
@@ -58,6 +58,13 @@
 								value="${sessionPersonne.inscription_Personne}" /></li>
 
 					</ul>
+					<br><br>
+					<div class="row">
+						<div class="col-lg-12 col-md-10 mx-auto">
+							<a class="btn btn-primary btn-lg btn-block" href="modifiercompte"
+								role="button">Modifier mes informations</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

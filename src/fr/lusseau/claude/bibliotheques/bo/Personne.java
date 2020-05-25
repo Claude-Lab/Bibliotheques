@@ -1,15 +1,22 @@
 package fr.lusseau.claude.bibliotheques.bo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
- * Classe en charge des personnes
+ * Classe en charge des personnes.
  * @version Bibliotheques -v1,0
  * @date  6 mai 2020 - 11:59:19
  * @author Claude LUSSEAU
  *
  */
-public class Personne {
+
+@XmlRootElement(name="personne")
+public class Personne implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer id_Personne;
 	private String prenom_Personne;
@@ -310,6 +317,9 @@ public class Personne {
 		buffer.append("Mail : ").append(this.getMail_Personne()).append("\n");
 		buffer.append("Tel : ").append(this.getTel_Personne()).append("\n");
 		buffer.append("Type : ").append(this.getType_Personne()).append("\n");
+		buffer.append("Cotisation : ").append(this.getCotisation_Personne()).append("\n");
+		buffer.append("Inscription : ").append(this.getInscription_Personne()).append("\n");
+		buffer.append("Role : ").append(this.getRole_Personne()).append("\n");
 		return buffer.toString();
 	}
 }

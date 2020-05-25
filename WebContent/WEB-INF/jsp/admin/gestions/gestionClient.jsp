@@ -1,9 +1,6 @@
-<%@page import="fr.lusseau.claude.bibliotheques.bo.Personne"%>
-<%@page import="fr.lusseau.claude.bibliotheques.bll.PersonneManager"%>
-<%@page import="fr.lusseau.claude.bibliotheques.bll.BLLException"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,23 +59,23 @@
 						<h6 class="m-2 font-weight-bold text-primary">Ajouter un
 							client</h6>
 					</div>
-					
+
 					<div class="card-body">
-					<c:if test="${ !empty listeCodesErreur }">
-						<p style="color: red;">
-							<c:out value="ERREUR" />
-						</p>
-					</c:if>
-					<c:if test="${!empty form}">
-						<p style="color: red";>
-							<c:out value="${form.resultatInsert}"></c:out>
-						</p>
-					</c:if>
-					<c:if test="${empty form}">
-						<p style="color: red";>
-							<c:out value="${form.resultatInsert}"></c:out>
-						</p>
-					</c:if>
+						<c:if test="${ !empty listeCodesErreur }">
+							<p style="color: red;">
+								<c:out value="ERREUR" />
+							</p>
+						</c:if>
+						<c:if test="${!empty form}">
+							<p style="color: red";>
+								<c:out value="${form.resultatInsert}"></c:out>
+							</p>
+						</c:if>
+						<c:if test="${empty form}">
+							<p style="color: red";>
+								<c:out value="${form.resultatInsert}"></c:out>
+							</p>
+						</c:if>
 
 
 						<form method="post" class="user" action="gestionclient">
@@ -261,7 +258,7 @@
 											<td><c:out value="${clients.getTel_Personne()}" /></td>
 											<td><c:out value="${clients.getMail_Personne()}" /></td>
 											<td><c:out value="${clients.getCotisation_Personne()}" />€</td>
-												
+
 											<td><a
 												href="modifierpersonne?id_Personne=${clients.getId_Personne()}">Modifier</a></td>
 											<td><a

@@ -214,7 +214,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			throw businessException;
 		}
 		try {
-			con = ConnectionProvider.getConnection();
+			con = JdbcTools.getConnection();
 			pstmt = con.prepareStatement(sqlUpdate);
 			pstmt.setString(1, data.getPrenom_Personne());
 			pstmt.setString(2, data.getNom_Personne());
@@ -227,6 +227,8 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			pstmt.setInt(9, data.getCotisation_Personne());
 			pstmt.setString(10, data.getRole_Personne());
 			pstmt.setString(11, data.getType_Personne());
+			pstmt.setObject(12, data.getInscription_Personne());
+			
 
 			pstmt.executeUpdate();
 
@@ -254,7 +256,6 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 				}
 			}
 		}
-
 	}
 
 	/**

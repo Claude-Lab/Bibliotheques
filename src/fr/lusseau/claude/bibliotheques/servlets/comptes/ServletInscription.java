@@ -1,4 +1,4 @@
-package fr.lusseau.claude.bibliotheques.servlets;
+package fr.lusseau.claude.bibliotheques.servlets.comptes;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

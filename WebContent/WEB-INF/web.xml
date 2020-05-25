@@ -62,12 +62,12 @@
 			<include-prelude>/WEB-INF/jsp/includes/taglibs.jsp</include-prelude>
 		</jsp-property-group>
 		<jsp-property-group>
-			<display-name>TIMEOUT_SESSION</display-name>
+			<display-name>TIMEOUT_SESSION_CLIENT</display-name>
 			<url-pattern>/WEB-INF/jps/client/*</url-pattern>
 			<include-prelude>/WEB-INF/jsp/includes/timedoutRedirect.jsp</include-prelude>
 		</jsp-property-group>
 		<jsp-property-group>
-			<display-name>TIMEOUT_SESSION</display-name>
+			<display-name>TIMEOUT_SESSION_ADMIN</display-name>
 			<url-pattern>/WEB-INF/jps/admin/*</url-pattern>
 			<include-prelude>/WEB-INF/jsp/includes/timedoutRedirect.jsp</include-prelude>
 		</jsp-property-group>
@@ -85,7 +85,7 @@
 	
 
 	<session-config>
-		<session-timeout>5</session-timeout>
+		<session-timeout>1</session-timeout>
 	</session-config>
 
 

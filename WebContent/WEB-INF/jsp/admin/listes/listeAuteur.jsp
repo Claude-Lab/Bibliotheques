@@ -28,7 +28,7 @@
 
 				<!-- Page Heading -->
 				<h1 class="h3 mb-2 text-gray-800">Livres</h1>
-				<p class="mb-4">Liste des livres enregistrï¿½s.</p>
+				<p class="mb-4">Liste des livres enregistrés.</p>
 
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4">
@@ -52,7 +52,7 @@
 										<th>id</th>
 										<th>Titre</th>
 										<th>Auteur</th>
-										<th>Nï¿½ ISBN</th>
+										<th>N° ISBN</th>
 										<th>Editeur</th>
 										<th>Bibliothï¿½que</th>
 										<th>Etat</th>
