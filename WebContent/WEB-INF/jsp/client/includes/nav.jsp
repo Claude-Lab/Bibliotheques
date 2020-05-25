@@ -13,21 +13,17 @@
             <a class="nav-link js-scroll-trigger" href="accueil">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#apropos">A
-						propos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#mcd">MCD/MPLD</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="deconnexion">Se deconnecter</a>
-          </li>
-          <c:if test="${(sessionPersonne.type_Personne) == 'SALARIE'}"> >
+            <a class="nav-link js-scroll-trigger" href="moncompte">Mon Compte</a>
+          
+          <c:if test="${(sessionPersonne.type_Personne) == 'SALARIE'}">
          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/Bibliotheques/admin/accueil">
-          <c:out value="Admin"/></a>
+          <c:out value="Administration"/></a>
           </li>
           </c:if>
+          </li>
+            <a class="nav-link js-scroll-trigger" href="deconnexion">Se deconnecter</a>
+          </li>
         </ul>
       </div>
     </div>

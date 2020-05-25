@@ -10,7 +10,20 @@
 	<%@ include file="includes/nav.jsp"%>
 
 	<!-- Page Header -->
-	<%@ include file="includes/pageheader.html"%>
+	<header class="masthead"
+		style="background-image: url('../img/book.jpg')">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<div class="site-heading">
+						<h1>Bibliothèques</h1>
+						<!--    <span class="subheading">A Blog Theme by Start Bootstrap</span> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
 	<!-- Main Content -->
 	<section id="about">
@@ -19,6 +32,7 @@
 				<div class="col-lg-8 mx-auto">
 					<h3>Bienvenue ${sessionPersonne.prenom_Personne}
 						${sessionPersonne.nom_Personne} !</h3>
+
 					<br>
 					<p>Voici l'exercice comportant une base de données de livres à
 						disposition dans les cinq bibliothèques d'une communauté de

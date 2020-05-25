@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Classe en charge des emprunts.
@@ -12,8 +12,8 @@ import java.time.LocalDate;
 public class Emprunt {
 
 	private Integer id_Emprunt;
-	private LocalDate DateEmprunt;
-	private LocalDate DateRetour;
+	private LocalDateTime DateEmprunt;
+	private LocalDateTime DateRetour;
 	private int id_Livre;
 	private int id_Personne;
 
@@ -31,7 +31,7 @@ public class Emprunt {
 	 * @param id_Livre
 	 * @param id_Personne
 	 */
-	public Emprunt(Integer id_Emprunt, LocalDate DateEmprunt, LocalDate DateRetour, int id_Livre, int id_Personne) {
+	public Emprunt(Integer id_Emprunt, LocalDateTime DateEmprunt, LocalDateTime DateRetour, int id_Livre, int id_Personne) {
 		setId_Emprunt(id_Emprunt);
 		setDateEmprunt(DateEmprunt);
 		setDateRetour(DateRetour);
@@ -46,7 +46,7 @@ public class Emprunt {
 	 * @param id_Livre
 	 * @param id_Personne
 	 */
-	public Emprunt(LocalDate DateEmprunt, LocalDate DateRetour, int id_Livre, int id_Personne) {
+	public Emprunt(LocalDateTime DateEmprunt, LocalDateTime DateRetour, int id_Livre, int id_Personne) {
 		setDateEmprunt(DateEmprunt);
 		setDateRetour(DateRetour);
 		setId_Livre(id_Livre);
@@ -73,7 +73,7 @@ public class Emprunt {
 	 * Guetter pour dateEmprunt.
 	 * @return the  dateEmprunt
 	 */
-	public LocalDate getDateEmprunt() {
+	public LocalDateTime getDateEmprunt() {
 		return DateEmprunt;
 	}
 
@@ -81,7 +81,7 @@ public class Emprunt {
 	 * Setter pour dateEmprunt.
 	 * @param dateEmprunt the dateEmprunt to set
 	 */
-	public void setDateEmprunt(LocalDate dateEmprunt) {
+	public void setDateEmprunt(LocalDateTime dateEmprunt) {
 		DateEmprunt = dateEmprunt;
 	}
 
@@ -89,7 +89,7 @@ public class Emprunt {
 	 * Guetter pour dateRetour.
 	 * @return the  dateRetour
 	 */
-	public LocalDate getDateRetour() {
+	public LocalDateTime getDateRetour() {
 		return DateRetour;
 	}
 
@@ -97,7 +97,7 @@ public class Emprunt {
 	 * Setter pour dateRetour.
 	 * @param dateRetour the dateRetour to set
 	 */
-	public void setDateRetour(LocalDate dateRetour) {
+	public void setDateRetour(LocalDateTime dateRetour) {
 		DateRetour = dateRetour;
 	}
 

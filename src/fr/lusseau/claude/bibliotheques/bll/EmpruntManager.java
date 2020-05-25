@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bll;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.lusseau.claude.bibliotheques.BusinessException;
@@ -113,8 +113,8 @@ public class EmpruntManager {
 	public void validerEmprunt(Emprunt e) throws BLLException {
 		boolean valide = true;
 		StringBuffer buffer = new StringBuffer();
-		LocalDate dateDuJour = LocalDate.now();
-		LocalDate dateEmprunt = e.getDateEmprunt();
+		LocalDateTime dateDuJour = LocalDateTime.now();
+		LocalDateTime dateEmprunt = e.getDateEmprunt();
 
 		// obligation des attribut à la saisie
 		if (e.getDateEmprunt() == null || (dateEmprunt.isBefore(dateDuJour))) {

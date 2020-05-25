@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Livre {
 
 	private Integer id_Livre;
 	private String titre_Livre;
-	private LocalDate dateAchat_Livre;
+	private LocalDateTime dateAchat_Livre;
 	private String description_Livre;
 	private String prenom_Nom_Auteur;
 	private String isbn_Ecrit;
@@ -43,7 +43,7 @@ public class Livre {
 	 * @param nom_Bibliotheque
 	 * @param usage_Etat
 	 */
-	public Livre(Integer id_Livre, String titre_Livre, LocalDate dateAchat_Livre, String description_Livre,
+	public Livre(Integer id_Livre, String titre_Livre, LocalDateTime dateAchat_Livre, String description_Livre,
 			String prenom_Nom_Auteur, String isbn_Ecrit, String nom_Editeur, String nom_Bibliotheque, String usage_Etat) {
 		setId_Livre(id_Livre);
 		setTitre_Livre(titre_Livre);
@@ -68,7 +68,7 @@ public class Livre {
 	 * @param nom_Bibliotheque
 	 * @param usage_Etat
 	 */
-	public Livre(String titre_Livre, LocalDate dateAchat_Livre, String description_Livre, String prenom_Nom_Auteur,
+	public Livre(String titre_Livre, LocalDateTime dateAchat_Livre, String description_Livre, String prenom_Nom_Auteur,
 			String isbn_Ecrit, String nom_Editeur, String nom_Bibliotheque, String usage_Etat) {
 		setTitre_Livre(titre_Livre);
 		setDateAchat_Livre(dateAchat_Livre);
@@ -116,7 +116,7 @@ public class Livre {
 	 * Guetter pour dateAchat_Livre.
 	 * @return the  dateAchat_Livre
 	 */
-	public LocalDate getDateAchat_Livre() {
+	public LocalDateTime getDateAchat_Livre() {
 		return dateAchat_Livre;
 	}
 
@@ -124,7 +124,7 @@ public class Livre {
 	 * Setter pour dateAchat_Livre.
 	 * @param dateAchat_Livre the dateAchat_Livre to set
 	 */
-	public void setDateAchat_Livre(LocalDate dateAchat_Livre) {
+	public void setDateAchat_Livre(LocalDateTime dateAchat_Livre) {
 		this.dateAchat_Livre = dateAchat_Livre;
 	}
 

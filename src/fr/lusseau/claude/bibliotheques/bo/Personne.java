@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bo;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 /**
  * Classe en charge des personnes
@@ -23,7 +23,7 @@ public class Personne {
 	private String type_Personne;
 	private int cotisation_Personne;
 	private String role_Personne;
-	private LocalDate inscription_Personne;
+	private Timestamp inscription_Personne;
 
 	
 	/**
@@ -49,7 +49,7 @@ public class Personne {
 	 * @param inscription_Personne
 	 */
 	public Personne(Integer id_Personne, String prenom_Personne, String nom_Personne, String adresse_Personne,
-			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, LocalDate inscription_Personne) {
+			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, Timestamp inscription_Personne) {
 		
 		setId_Personne(id_Personne);
 		setPrenom_Personne(prenom_Personne);
@@ -82,7 +82,7 @@ public class Personne {
 	 * @param inscription_Personne
 	 */
 	public Personne(String prenom_Personne, String nom_Personne, String adresse_Personne,
-			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, LocalDate inscription_Personne) {
+			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, Timestamp inscription_Personne) {
 		
 		setPrenom_Personne(prenom_Personne);
 		setNom_Personne(nom_Personne);
@@ -263,7 +263,7 @@ public class Personne {
 	 * Guetter pour inscription_Personne.
 	 * @return the inscription_Personne
 	 */
-	public LocalDate getInscription_Personne() {
+	public Timestamp getInscription_Personne() {
 		return inscription_Personne;
 	}
 
@@ -271,7 +271,7 @@ public class Personne {
 	 * Setter pour inscription_Personne.
 	 * @param inscription_Personne the inscription_Personne to set
 	 */
-	public void setInscription_Personne(LocalDate inscription_Personne) {
+	public void setInscription_Personne(Timestamp inscription_Personne) {
 		this.inscription_Personne = inscription_Personne;
 	}
 	

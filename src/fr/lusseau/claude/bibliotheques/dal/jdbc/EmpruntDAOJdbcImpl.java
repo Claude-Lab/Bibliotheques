@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +107,7 @@ public class EmpruntDAOJdbcImpl implements EmpruntDAO {
 			rs = stmt.executeQuery();
 			Emprunt em = null;
 			while (rs.next()) {
-				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDate.class), rs.getObject("retour_emprunt", LocalDate.class),
+				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDateTime.class), rs.getObject("retour_emprunt", LocalDateTime.class),
 						rs.getInt("id_Livre"), rs.getInt("id_Personne"));
 			}
 			emprunts.add(em);
@@ -142,7 +142,7 @@ public class EmpruntDAOJdbcImpl implements EmpruntDAO {
 			rs = stmt.executeQuery();
 			Emprunt em = null;
 			while (rs.next()) {
-				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDate.class), rs.getObject("retour_emprunt", LocalDate.class),
+				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDateTime.class), rs.getObject("retour_emprunt", LocalDateTime.class),
 						rs.getInt("id_Livre"), rs.getInt("id_Personne"));
 			}
 			emprunts.add(em);
@@ -178,7 +178,7 @@ public class EmpruntDAOJdbcImpl implements EmpruntDAO {
 			rs = stmt.executeQuery(sqlSelectAll);
 			Emprunt em = null;
 			while (rs.next()) {
-				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDate.class), rs.getObject("retour_Emprunt", LocalDate.class),
+				em = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDateTime.class), rs.getObject("retour_Emprunt", LocalDateTime.class),
 						rs.getInt("id_Livre"), rs.getInt("id_Personne"));
 
 				emprunts.add(em);
@@ -217,8 +217,8 @@ public class EmpruntDAOJdbcImpl implements EmpruntDAO {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				emprunts = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDate.class),
-						rs.getObject("retour_Emprunt", LocalDate.class), rs.getInt("id_Livre"), rs.getInt("id_Personne"));
+				emprunts = new Emprunt(rs.getInt("id_Emprunt"), rs.getObject("depart_Emprunt", LocalDateTime.class),
+						rs.getObject("retour_Emprunt", LocalDateTime.class), rs.getInt("id_Livre"), rs.getInt("id_Personne"));
 
 			}
 		} catch (SQLException e) {

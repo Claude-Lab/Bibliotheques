@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bll;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.lusseau.claude.bibliotheques.bo.Livre;
@@ -33,7 +33,7 @@ public class LivreManager {
 		return livres;
 	}
 
-	public Livre addLivre(String titre_Livre, LocalDate dateAchat_Livre, String description_Livre,
+	public Livre addLivre(String titre_Livre, LocalDateTime dateAchat_Livre, String description_Livre,
 			String prenom_Nom_Auteur, String isbn_Ecrit, String nom_Edideur, String nom_Bibliotheque, String usage_Etat)
 					throws BLLException, BusinessException {
 

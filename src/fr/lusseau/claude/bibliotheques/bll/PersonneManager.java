@@ -1,6 +1,6 @@
 package fr.lusseau.claude.bibliotheques.bll;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.List;
 
 import fr.lusseau.claude.bibliotheques.BusinessException;
@@ -50,7 +50,7 @@ public class PersonneManager {
 	 * @throws BusinessException
 	 */
 	public Personne addPersonne(String prenom_Personne, String nom_Personne, String adresse_Personne,
-			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, LocalDate inscription_Personne)
+			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, Timestamp inscription_Personne)
 			throws BLLException, BusinessException {
 
 		BusinessException businessException = new BusinessException();

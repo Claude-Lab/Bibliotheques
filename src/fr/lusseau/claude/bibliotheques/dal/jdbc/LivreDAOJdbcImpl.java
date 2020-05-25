@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +93,7 @@ public class LivreDAOJdbcImpl implements LivreDAO {
 			rs = pstmt.executeQuery();
 			Livre l = null;
 			while (rs.next()) {
-				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDate.class),
+				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDateTime.class),
 						rs.getString("description_Livre"), rs.getString("Auteurs"), rs.getString("isbn_Ecrit"),
 						rs.getString("nom_Editeur"), rs.getString("nom_Biblio"), rs.getString("usage_Etat"));
 				livres.add(l);
@@ -149,7 +149,7 @@ public class LivreDAOJdbcImpl implements LivreDAO {
 
 			while (rs.next()) {
 				livre = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"),
-						rs.getObject("dateAchat_Livre", LocalDate.class), rs.getString("description_Livre"),
+						rs.getObject("dateAchat_Livre", LocalDateTime.class), rs.getString("description_Livre"),
 						rs.getString("prenom_Nom_Auteur"), rs.getString("isbn_Ecrit"), rs.getString("nom_Bibliotheque"),
 						rs.getString("nom_Editeur"), rs.getString("usage_Etat"));
 
@@ -499,7 +499,7 @@ public class LivreDAOJdbcImpl implements LivreDAO {
 			rs = stmt.executeQuery(sqlSelectByTitle);
 			Livre l = null;
 			while (rs.next()) {
-				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDate.class),
+				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDateTime.class),
 						rs.getString("description_Livre"), rs.getString("prenom_Nom_Auteur"),
 						rs.getString("isbn_Ecrit"), rs.getString("nom_Bibliotheque"), rs.getString("nom_Editeur"),
 						rs.getString("usage_Etat"));
@@ -553,7 +553,7 @@ public class LivreDAOJdbcImpl implements LivreDAO {
 			rs = pstmt.executeQuery();
 			Livre l = null;
 			while (rs.next()) {
-				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDate.class),
+				l = new Livre(rs.getInt("id_Livre"), rs.getString("titre_Livre"), rs.getObject("dateAchat_Livre", LocalDateTime.class),
 						rs.getString("description_Livre"), rs.getString("prenom_Nom_Auteur"),
 						rs.getString("isbn_Ecrit"), rs.getString("nom_Bibliotheque"), rs.getString("nom_Editeur"),
 						rs.getString("usage_Etat"));

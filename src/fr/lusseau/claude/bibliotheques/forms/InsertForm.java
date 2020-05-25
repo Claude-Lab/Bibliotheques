@@ -3,7 +3,8 @@
  */
 package fr.lusseau.claude.bibliotheques.forms;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class InsertForm {
 		String role_Personne = request.getParameter("role_Personne");
 		String type_Personne = "CLIENT";
 		int cotisation_Personne = Integer.parseInt(request.getParameter("cotisation_Personne"));
-		LocalDate inscription_Personne = LocalDate.now();// LocalDate.parse(request.getParameter("inscription_Personne"));
+		Timestamp inscription_Personne = new Timestamp(System.currentTimeMillis());// LocalDate.parse(request.getParameter("inscription_Personne"));
 		@SuppressWarnings("unused")
 		Personne value = null;
 		Personne value_Mail = null;
@@ -173,7 +174,7 @@ public class InsertForm {
 		String type_Personne = "SALARIE";
 		String role_Personne = request.getParameter("role_Personne");
 		int cotisation_Personne = Integer.parseInt(request.getParameter("cotisation_Personne"));
-		LocalDate inscription_Personne = LocalDate.now();// LocalDate.parse(request.getParameter("inscription_Personne"));
+		Timestamp inscription_Personne = new Timestamp(System.currentTimeMillis());// LocalDate.parse(request.getParameter("inscription_Personne"));
 		@SuppressWarnings("unused")
 		Personne value = null;
 
@@ -436,7 +437,7 @@ public class InsertForm {
 	 */
 	public void validerLivre(HttpServletRequest request) {
 		String titre_Livre = request.getParameter("titre_Livre");
-		LocalDate dateAchat_Livre = LocalDate.parse(request.getParameter("dateAchat_Livre"));
+		LocalDateTime dateAchat_Livre = LocalDateTime.parse(request.getParameter("dateAchat_Livre"));
 		String description_Livre = request.getParameter("description_Livre");
 		String prenom_Nom_Auteur = request.getParameter("prenom_Nom_Auteur");
 		String isbn_Ecrit = request.getParameter("isbn_Ecrit");
