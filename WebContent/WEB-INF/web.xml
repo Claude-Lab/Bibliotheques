@@ -38,7 +38,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>RestrictionFilterClient</filter-name>
 		<filter-class>fr.lusseau.claude.bibliotheques.filters.FiltreAccesInterditClient</filter-class>
@@ -49,8 +49,8 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
-	
+
+
 
 
 	<listener>
@@ -61,25 +61,28 @@
 			<url-pattern>*.jsp</url-pattern>
 			<include-prelude>/WEB-INF/jsp/includes/taglibs.jsp</include-prelude>
 		</jsp-property-group>
+		<jsp-property-group>
+			<display-name>TIMEOUT_SESSION</display-name>
+			<url-pattern>/WEB-INF/jps/client/*</url-pattern>
+			<include-prelude>/WEB-INF/jsp/includes/timedoutRedirect.jsp</include-prelude>
+		</jsp-property-group>
+		<jsp-property-group>
+			<display-name>TIMEOUT_SESSION</display-name>
+			<url-pattern>/WEB-INF/jps/admin/*</url-pattern>
+			<include-prelude>/WEB-INF/jsp/includes/timedoutRedirect.jsp</include-prelude>
+		</jsp-property-group>
 	</jsp-config>
 
 	<servlet>
-	<servlet-name>INDEX</servlet-name>
-	<jsp-file>/WEB-INF/jsp/public/index.jsp</jsp-file>
+		<servlet-name>INDEX</servlet-name>
+		<jsp-file>/WEB-INF/jsp/public/index.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-	<servlet-name>INDEX</servlet-name>
-	<url-pattern>/index</url-pattern>
+		<servlet-name>INDEX</servlet-name>
+		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
 
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>JSP_ADMIN</servlet-name> -->
-<!-- 		<jsp-file>/WEB-INF/jsp/admin/accueilAdmin.jsp</jsp-file> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>JSP_ADMIN</servlet-name> -->
-<!-- 		<url-pattern>/admin/acceuil</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	
 
 	<session-config>
 		<session-timeout>5</session-timeout>

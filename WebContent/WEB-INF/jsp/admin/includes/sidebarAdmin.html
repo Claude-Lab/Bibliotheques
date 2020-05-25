@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<!-- Page Wrapper -->
+<div id="wrapper">
+
+	<!-- Sidebar -->
+	<ul
+		class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+		id="accordionSidebar">
+
+		<!-- Sidebar - Brand -->
+		<a class="sidebar-brand d-flex align-items-center justify-content-center"
+			href="accueil">
+			<div class="sidebar-brand-icon rotate-n-15"></div>
+			<div class="sidebar-brand-text mx-3">Administration
+				Bibliothèque</div>
+		</a>
+
+		<!-- Divider -->
+		<hr class="sidebar-divider my-0">
+
+		<!-- Nav Item - Dashboard -->
+		<li class="nav-item"><a class="nav-link" href="accueil"> <i
+				class="fas fa-fw fa-tachometer-alt"></i> <span>Accueil Admin</span></a>
+		</li>
+
+		
+		<li class="nav-item"><a class="nav-link" href="/Bibliotheques/client/accueil"> <i
+				class="fas fa-fw fa-tachometer-alt"></i> <span>Front site</span></a>
+		</li>
+
+		<!-- Divider -->
+		<hr class="sidebar-divider">
+
+
+
+		<!-- Heading -->
+		<div class="sidebar-heading">Gestion</div>
+
+		<!-- Nav Item - Pages Collapse Menu -->
+
+
+		<!-- Nav Item - Tables -->
+
+
+		<li class="nav-item"><a class="nav-link collapsed" href="#"
+			data-toggle="collapse" data-target="#collapseUtilities"
+			aria-expanded="true" aria-controls="collapseUtilities"> <i
+				class="fas fa-fw fa-wrench"></i> <span>Emprunts</span>
+		</a>
+			<div id="collapseUtilities" class="collapse"
+				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">EMPRUNTS</h6>
+					<a class="collapse-item" href="empruntsPasses">Passée</a> <a
+						class="collapse-item" href="empruntsEnCours">En cours</a> <a
+						class="collapse-item" href="empruntsAVenir">A venir</a>
+				</div>
+			</div></li>
+
+
+
+
+		<li class="nav-item"><a class="nav-link collapsed" href="#"
+			data-toggle="collapse" data-target="#collapseTwo"
+			aria-expanded="true" aria-controls="collapseTwo"> <i
+				class="fas fa-fw fa-cog"></i> <span>Gestion de la base</span>
+		</a>
+			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+				data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Utilitaires :</h6>
+					<a class="collapse-item" href="gestionLivres">Gestion des
+						livres</a> <a class="collapse-item" href="gestionclient">Gestion
+						des personnes</a> <a class="collapse-item" href="gestionbibliotheque">Gestion
+						des bibliothèques</a> <a class="collapse-item" href="gestionediteur">Gestion
+						des éditeurs</a> <a class="collapse-item" href="gestionauteur">Gestion
+						des auteurs</a> <a class="collapse-item" href="gestioncotisation">Gestion
+						des Cotisations</a> <a class="collapse-item" href="gestionrole">Gestion
+						des Roles</a> <a class="collapse-item" href="gestionetat">Gestion
+						des Etats</a>
+
+				</div>
+			</div></li>
+
+
+		<!-- Divider -->
+		<hr class="sidebar-divider d-none d-md-block"/>
+
+		<!-- Sidebar Toggler (Sidebar) -->
+		<div class="text-center d-none d-md-inline">
+			<button class="rounded-circle border-0" id="sidebarToggle"></button>
+		</div>
+
+	</ul>
+	<!-- End of Sidebar -->
