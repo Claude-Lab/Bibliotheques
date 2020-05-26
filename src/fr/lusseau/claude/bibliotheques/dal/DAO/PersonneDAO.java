@@ -42,7 +42,7 @@ public interface PersonneDAO {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public Personne selectById(int id) throws BusinessException;
+	public Personne selectById(int id_Personne) throws BusinessException;
 	
 	/**
 	 * Methode en charge de mettre à jours une personne.

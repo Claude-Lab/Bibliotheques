@@ -3,15 +3,11 @@
  */
 package fr.lusseau.claude.bibliotheques.forms;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import fr.lusseau.claude.bibliotheques.BusinessException;
 import fr.lusseau.claude.bibliotheques.bll.BLLException;
 import fr.lusseau.claude.bibliotheques.bll.PersonneManager;
 import fr.lusseau.claude.bibliotheques.bo.Personne;
@@ -31,56 +27,47 @@ public class UpdateForm {
 	private String resultatUpdate;
 	private String resultatMail;
 	
-	
 	/**
 	 * Methode en charge de Valider l'enregistrement d'un client.
 	 * 
 	 * @param request
 	 */
-	public void validerClient(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public void validerPersonne(HttpServletRequest request) {
 		
-		@SuppressWarnings("unused")
-		int id_Personne = (int) session.getAttribute("id_Personne");
-		String prenom_Personne = request.getParameter("prenom_Personne");
-		String nom_Personne = request.getParameter("nom_Personne");
-		String adresse_Personne = request.getParameter("adresse_Personne");
-		String cp_Personne = request.getParameter("cp_Personne");
-		String ville_Personne = request.getParameter("ville_Personne");
-		String mail_Personne = request.getParameter("mail_Personne");
-		String tel_Personne = request.getParameter("tel_Personne");
-		String motDePasse_Personne = request.getParameter("motDePasse_Personne");
-		String role_Personne = request.getParameter("role_Personne");
-		String type_Personne = request.getParameter("type_Personne");
-		int cotisation_Personne = 0;
-		Timestamp inscription_Personne = null;
-		@SuppressWarnings("unused")
-		Personne value = null;
-		Personne value_Mail = null;
+		int id_Personne = Integer.parseInt(request.getParameter("id_Personne"));
+		request.getParameter("prenom_Personne");
+		request.getParameter("nom_Personne");
+		request.getParameter("adresse_Personne");
+		request.getParameter("cp_Personne");
+		request.getParameter("ville_Personne");
+		request.getParameter("mail_Personne");
+		request.getParameter("tel_Personne");
+		request.getParameter("motDePasse_Personne");
+		request.getParameter("role_Personne");
+		request.getParameter("type_Personne");
+		request.getParameter("cotisation_Personne");
+		
+		Personne value = new Personne();
+		Personne value_Mail = new Personne();
 
-		if (session.getAttribute("id_Personne") != null) {
+		if (id_Personne != 0) {
 			try {
 				PersonneManager manager = new PersonneManager();
 				try {
-					try {
-						value = manager.updatePersonne(prenom_Personne, nom_Personne, adresse_Personne, cp_Personne,
-								ville_Personne, mail_Personne, tel_Personne, motDePasse_Personne, cotisation_Personne,
-								role_Personne, type_Personne, inscription_Personne);
-					} catch (BLLException e) {
-						e.printStackTrace();
-					}
-				} catch (BusinessException e) {
+					manager.updatePersonne(value);
+				} catch (BLLException e) {
 					e.printStackTrace();
 				}
 
-				if (mail_Personne != null) {
+				if (value_Mail.getMail_Personne() == null) {
 					try {
 						PersonneManager man = new PersonneManager();
-						value_Mail = man.rechercherMail(mail_Personne);
+						man.rechercherMail(value_Mail.getMail_Personne());
 					} catch (BLLException e) {
 						e.printStackTrace();
 					}
 
-					if (value_Mail != null) {
+					if (value_Mail.getMail_Personne() != null) {
 						resultatMail = "Cet eMail est déjà utilisé";
 					}
 				}
@@ -106,6 +93,7 @@ public class UpdateForm {
 		}
 		request.setAttribute("resultatUpdate", resultatUpdate);
 	}
+	
 
 
 	/**

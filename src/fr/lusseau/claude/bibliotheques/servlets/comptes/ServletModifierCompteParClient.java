@@ -39,7 +39,7 @@ public class ServletModifierCompteParClient extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		// exportation de la l'update par forulaire.
-		updateClient(request, response, session);
+		updateClient(request);
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/client/compte.jsp").forward(request, response);
 	}
@@ -50,11 +50,11 @@ public class ServletModifierCompteParClient extends HttpServlet {
 	 * 
 	 * @param request
 	 */
-	private void updateClient(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	private void updateClient(HttpServletRequest request) {
 		
 		
 		UpdateForm form = new UpdateForm();
-		form.validerClient(request, response, session);
+		form.validerPersonne(request);
 
 		request.setAttribute("form", form);
 	}

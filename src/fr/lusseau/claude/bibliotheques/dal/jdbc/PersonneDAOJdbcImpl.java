@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +25,17 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 	private static final String TYPE_CLIENT = "CLIENT";
 	private static final String TYPE_SALARIE = "SALARIE";
 
-	private static final String sqlSelectById = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, id_Caution, id_Role, type_Personne"
-			+ "FROM PERSONNES WHERE id_Personne = ?";
+	private static final String sqlSelectById = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, ROLES.type_Role, tel_Personne, motDePasse_Personne, type_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role WHERE id_Personne = ?";
 
-	private static final String sqlSelectAll = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, type_Personne, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role ORDER BY id_Personne DESC";
+	private static final String sqlSelectAll = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, type_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role ORDER BY id_Personne DESC";
 
-	private static final String sqlSelectAllClients = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, type_Personne, inscription_Personne FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role WHERE PERSONNES.type_Personne = \'"
+	private static final String sqlSelectAllClients = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, CAUTIONS.valeurs_Caution, type_Personne, inscription_Personne, ROLES.type_Role  FROM PERSONNES LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role WHERE PERSONNES.type_Personne = \'"
 			+ TYPE_CLIENT + "\' ORDER BY id_Personne DESC";
 
 	private static final String sqlSelectAllSalaries = "SELECT id_Personne, prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, type_Personne, CAUTIONS.valeurs_Caution, ROLES.type_Role, inscription_Personne FROM PERSONNES LEFT JOIN ROLES ON PERSONNES.id_Role = ROLES.id_Role LEFT JOIN CAUTIONS ON PERSONNES.id_Caution = CAUTIONS.id_Caution WHERE PERSONNES.type_Personne = \'"
 			+ TYPE_SALARIE + "\' ORDER BY id_Personne DESC";
 
-	private static final String sqlUpdate = "UPDATE PERSONNES SET prenom_Personne=?,nom_Personne=?,adresse_Personne=?,codePostal_Personne=?,ville_Personne=?,eMail_Personne=?,tel_Personne=?,motDePasse_Personne=?, id_Caution=?, id_Role=?, type_Personne=?  where id_Personne=?";
+	private static final String sqlUpdate = "UPDATE PERSONNES SET prenom_Personne=?, nom_Personne=?, adresse_Personne=?, codePostal_Personne=?, ville_Personne=?, eMail_Personne=?, tel_Personne=?, motDePasse_Personne=?, type_Personne=?, id_Caution=?, id_Role=?,  inscription_Personne=? where id_Personne=? ";
 
 	private static final String sqlInsert = "INSERT INTO PERSONNES (prenom_Personne, nom_Personne, adresse_Personne, codePostal_Personne, ville_Personne, eMail_Personne, tel_Personne, motDePasse_Personne, id_Caution, id_Role, type_Personne, inscription_Personne) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ";
 
@@ -109,7 +109,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 		int nbPersonne = 0;
 
 		try {
-			// con = JdbcTools.getConnection();
+			//con = JdbcTools.getConnection();
 			con = ConnectionProvider.getConnection();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sqlCountPerson);
@@ -214,24 +214,26 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			throw businessException;
 		}
 		try {
+//			con = ConnectionProvider.getConnection();
 			con = JdbcTools.getConnection();
 			pstmt = con.prepareStatement(sqlUpdate);
-			pstmt.setString(1, data.getPrenom_Personne());
-			pstmt.setString(2, data.getNom_Personne());
-			pstmt.setString(3, data.getAdresse_Personne());
-			pstmt.setString(4, data.getCp_Personne());
-			pstmt.setString(5, data.getVille_Personne());
-			pstmt.setString(6, data.getMail_Personne());
-			pstmt.setString(7, data.getTel_Personne());
-			pstmt.setString(8, data.getMotDePasse_Personne());
-			pstmt.setInt(9, data.getCotisation_Personne());
-			pstmt.setString(10, data.getRole_Personne());
-			pstmt.setString(11, data.getType_Personne());
-			pstmt.setObject(12, data.getInscription_Personne());
-			
+			pstmt.setInt(1, data.getId_Personne());
+			pstmt.setString(2, data.getPrenom_Personne());
+			pstmt.setString(3, data.getNom_Personne());
+			pstmt.setString(4, data.getAdresse_Personne());
+			pstmt.setString(5, data.getCp_Personne());
+			pstmt.setString(6, data.getVille_Personne());
+			pstmt.setString(7, data.getMail_Personne());
+			pstmt.setString(8, data.getTel_Personne());
+			pstmt.setString(9, data.getMotDePasse_Personne());
+			pstmt.setInt(10, data.getCotisation_Personne());
+			pstmt.setString(11, data.getRole_Personne());
+			pstmt.setString(12, data.getType_Personne());
+			pstmt.setObject(13, data.getInscription_Personne(), Types.TIMESTAMP);
+		
 
 			pstmt.executeUpdate();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -509,6 +511,7 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 
 	@Override
 	public Personne selectById(int id) throws BusinessException {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -521,31 +524,21 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 			throw businessException;
 		}
 		try {
-			con = ConnectionProvider.getConnection();
+			 con = JdbcTools.getConnection();
+//			con = ConnectionProvider.getConnection();
 			pstmt = con.prepareStatement(sqlSelectById);
-			rs = pstmt.executeQuery(sqlSelectById);
-			((PreparedStatement) pstmt).setInt(1, id);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
+						rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
+						rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
+						rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
+						rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
+						rs.getString("type_Personne"), rs.getString("type_Role"),
+						rs.getObject("inscription_Personne", Timestamp.class));
 
-				if (TYPE_CLIENT.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
-							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
-							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
-							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Personne"), rs.getString("type_Role"),
-							rs.getObject("inscription_Personne", Timestamp.class));
-				}
-				if (TYPE_SALARIE.equalsIgnoreCase(rs.getString("type_Personne").trim())) {
-					personne = new Personne(rs.getInt("id_Personne"), rs.getString("prenom_Personne"),
-							rs.getString("nom_Personne"), rs.getString("adresse_Personne"),
-							rs.getString("codePostal_Personne"), rs.getString("ville_Personne"),
-							rs.getString("eMail_Personne"), rs.getString("tel_Personne"),
-							rs.getString("motDePasse_Personne"), rs.getInt("valeurs_Caution"),
-							rs.getString("type_Personne"), rs.getString("type_Role"),
-							rs.getObject("inscription_Personne", Timestamp.class));
-				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -727,8 +720,9 @@ public class PersonneDAOJdbcImpl implements PersonneDAO {
 		try {
 			con = ConnectionProvider.getConnection();
 			pstmt = con.prepareStatement(sqlSelectByMail);
+			pstmt.setString(1, data);
 			rs = pstmt.executeQuery();
-			((PreparedStatement) pstmt).setString(1, data);
+			
 
 			if (rs.next()) {
 

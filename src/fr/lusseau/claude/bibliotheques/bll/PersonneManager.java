@@ -89,24 +89,18 @@ public class PersonneManager {
 	 * @throws BLLException
 	 * @throws BusinessException
 	 */
-	public Personne updatePersonne(String prenom_Personne, String nom_Personne, String adresse_Personne,
-			String cp_Personne, String ville_Personne, String mail_Personne, String tel_Personne, String motDePasse_Personne, int cotisation_Personne, String role_Personne, String type_Personne, Timestamp inscription_Personne)
-			throws BLLException, BusinessException {
+	public Personne updatePersonne(Personne data)
+			throws BLLException {
 
-		BusinessException businessException = new BusinessException();
-
-		Personne newPersonne = new Personne(prenom_Personne, nom_Personne, adresse_Personne, cp_Personne,
-				ville_Personne, mail_Personne, tel_Personne, motDePasse_Personne, cotisation_Personne, role_Personne, type_Personne, inscription_Personne);
+		try {
+			daoPersonne.update(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BLLException("Echec updatePersonne-data"+data, e);
+		}
+		return data;
 		
 
-			if (!businessException.hasErreurs()) {
-				this.daoPersonne.update(newPersonne);
-			}
-
-			if (businessException.hasErreurs()) {
-				throw businessException;
-			}
-		return newPersonne;
 	}
 
 
@@ -187,6 +181,22 @@ public class PersonneManager {
 	}
 	
 	/**
+	 * Methode en charge de récuperer les informations d'une personne.
+	 * @return
+	 * @throws BLLException
+	 */
+	public Personne selectById(int data) throws BLLException {
+		Personne value = null;
+
+		try {
+			value = daoPersonne.selectById(data);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+	
+	/**
 	 * Methode en charge de la selection de toutes les personnes
 	 * @return
 	 * @throws BLLException
@@ -257,9 +267,6 @@ public class PersonneManager {
 		return personne;
 	}
 	
-	
-
-
 	/**
 	 * Methode en charge de valider les insertions.
 	 * 
